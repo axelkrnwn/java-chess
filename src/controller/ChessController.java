@@ -14,6 +14,7 @@ public class ChessController {
 	private ChessView view;
 	private ArrayList<Piece> black, white;
 	private boolean isBlack;
+	private String errorMessage = "";
 	
 	public ChessController() {
 		view = new ChessView();
@@ -35,18 +36,24 @@ public class ChessController {
 		board = chessCreator.initialize(black, white);
 		
 		while(!isDefeated(black) && !isDefeated(white)) {
-			view.display(board, isBlack);
+			view.display(board, isBlack, errorMessage);
 			int[] src, dst;			
 			do {		
 				System.out.print("  [Choose the piece to be moved]");
 				src = view.inputCoordinate();
 			}while(!IsValidCell.check(src[0], src[1]) || board[src[1]][src[0]] == null || board[src[1]][src[0]].isBlack() != isBlack);	
 			do {
-				System.out.print("  [Choose the destination]");
+				System.out.print("  [Choose the piece destination]");
 				dst = view.inputCoordinate();
 			}while(!IsValidCell.check(dst[0], dst[1]) || dst[0] == src[0] && dst[1] == src[1]);
 			board[src[1]][src[0]].move(dst[0], dst[1], board);
-			if (board[src[1]][src[0]] == null) isBlack = !isBlack;
+			if (board[src[1]][src[0]] == null) {
+				isBlack = !isBlack;
+				errorMessage = "";
+			}else {
+				errorMessage = "Invalid move! please take a move again";
+			}
+			
 		}
 		view.displayResult(isBlack);
 	}

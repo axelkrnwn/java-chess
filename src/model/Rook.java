@@ -1,6 +1,5 @@
 package model;
 
-import helpers.IsValidCell;
 import interfaces.IStraight;
 
 public class Rook extends Piece implements IStraight{
@@ -19,7 +18,6 @@ public class Rook extends Piece implements IStraight{
 		//6 1 x
 		//6 0 v
 		if (!this.canStraight(x, y) 
-				|| !IsValidCell.check(x, y)
 				|| isObstructed(board, x, y)
 				|| (board[y][x] != null && board[y][x].isBlack() == this.isBlack())) {
 			
@@ -42,12 +40,12 @@ public class Rook extends Piece implements IStraight{
 		for (int i = start;i < end; i++) {
 			if (isY) {
 				if (board[axis][i] != null) {
-					board[axis][i].show();
+//					board[axis][i].show();
 					return true;
 				}				
 			}else {
 				if (board[i][axis] != null) {
-					board[i][axis].show();
+//					board[i][axis].show();
 					return true;
 				}
 			}
@@ -63,6 +61,7 @@ public class Rook extends Piece implements IStraight{
 		}else if (getX() == x) {
 			int start = 1 + (y < getY()? y: getY());
 			int end = y < getY()?getY():y;
+			System.out.println(y + ": " + start +" "+end);
 			return checkObstructed(board, start, end, x, false);
 		}
 		return false;

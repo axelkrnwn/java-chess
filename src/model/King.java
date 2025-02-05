@@ -1,6 +1,5 @@
 package model;
 
-import helpers.IsValidCell;
 
 public class King extends Piece{
 	
@@ -12,10 +11,9 @@ public class King extends Piece{
 	@Override
 	public void move(int x, int y, Piece[][] board) {
 		// TODO Auto-generated method stub
-		if (!IsValidCell.check(x, y) || 
-			(int) Math.abs(x - getX()) != 1 || 
-			(int) Math.abs(y - getY()) != 1 || 
-			board[y][x].isBlack() == this.isBlack()) {
+		if (((int) Math.abs(x - getX()) != 1 && 
+			(int) Math.abs(y - getY()) != 1) || 
+			(board[y][x] != null && board[y][x].isBlack() == this.isBlack())) {
 			return;
 		}
 		if (board[y][x] != null) board[y][x].setAlive(false);

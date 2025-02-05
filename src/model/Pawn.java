@@ -15,7 +15,7 @@ public class Pawn extends Piece{
 	@Override
 	public void move(int x, int y, Piece[][] board) 
 	{
-		if (!IsValidCell.check(x, y)) {
+		if (!IsValidCell.check(x+1, y+1)) {
 			return;
 		}
 		boolean eat = false;
@@ -29,7 +29,6 @@ public class Pawn extends Piece{
 				eat = true;
 			}
 			if (!eat && !(x == getX() && y > getY() && y <= getY() + moveAmount)) {
-				System.out.println("invalid");
 				return;
 			}
 			
@@ -42,7 +41,6 @@ public class Pawn extends Piece{
 				board[y][x].setAlive(false);
 			}
 			if (!eat && !(x == getX() && y < getY() && y >= getY() - moveAmount && board[y][x] == null)) {
-				System.out.println("invalid");
 				return;
 			}
 		}

@@ -2,11 +2,8 @@ package facades;
 
 import java.util.ArrayList;
 
-import factories.BishopFactory;
 import factories.KingFactory;
-import factories.KnightFactory;
 import factories.PawnFactory;
-import factories.QueenFactory;
 import factories.RookFactory;
 import interfaces.IFactory;
 import model.Piece;
@@ -40,7 +37,7 @@ public class BoardCreator {
 		int start = isBlack ? 0 : height - 1;
 		factory = new KingFactory(4, start, isBlack);
 		board[start][4] = factory.create();
-		factory = new QueenFactory(3, start, isBlack);
+		factory.setX(3);
 		board[start][3] = factory.create();
 		
 	}
@@ -60,9 +57,13 @@ public class BoardCreator {
 		initPawn(board, false);
 		factory = new RookFactory(0, 0, true);
 		initGuards(board, factory, 0);
-		factory = new KnightFactory(0, 1, true);
+		factory.setX(1);
+		factory.setY(0);
+		factory.setBlack(true);
 		initGuards(board, factory, 1);
-		factory = new BishopFactory(0, 2, true);
+		factory.setY(0);
+		factory.setX(2);
+		factory.setBlack(true);
 		initGuards(board, factory, 2);
 		
 		initKingAndQueen(board, true);

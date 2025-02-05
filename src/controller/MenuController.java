@@ -1,5 +1,6 @@
 package controller;
 
+import helpers.Logo;
 import view.MenuView;
 
 public class MenuController {
@@ -30,7 +31,7 @@ public class MenuController {
 			do {
 				input = menuView.inputOption();
 			}while(input < 1 || input > 3);
-			if (input == 3) { return; }
+			if (input == 3) { Logo.printLogo();return; }
 			option(input);
 		}
 		
